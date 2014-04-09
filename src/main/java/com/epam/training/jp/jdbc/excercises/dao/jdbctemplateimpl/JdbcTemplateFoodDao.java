@@ -15,14 +15,17 @@ public class JdbcTemplateFoodDao extends JdbcDaoSupport implements FoodDao {
 
 	@Override
 	public Food findFoodByName(String name) {
-		//TODO: implement
-		throw new UnsupportedOperationException();
+		Food food = getJdbcTemplate().queryForObject("SELECT ID, CALORIES, ISVEGAN, NAME, PRICE from FOOD WHERE NAME = ?", new Object[] { name }, new FoodMapper());
+		return food;
 	}
 
 	@Override
 	public void updateFoodPriceByName(String name, int newPrice) {
-		//TODO: implement
-		throw new UnsupportedOperationException();
+		String sql = "UPDATE food SET PRICE = ? WHERE NAME = ?";
+
+		if (getJdbcTemplate().update(sql, newPrice, name) != 1) {
+			throw new RuntimeException("Zero or more than one row updated.");
+		}
 	}
 
 }

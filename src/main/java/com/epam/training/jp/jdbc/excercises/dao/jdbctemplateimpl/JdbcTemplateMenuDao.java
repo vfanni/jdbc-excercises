@@ -14,8 +14,7 @@ public class JdbcTemplateMenuDao extends JdbcDaoSupport implements MenuDao {
 
 	@Override
 	public void removeMenu(int id) {
-		//TODO: implement
-		throw new UnsupportedOperationException();
+		getJdbcTemplate().update("delete from menu where id = ?", id);
 	}
 
 	
