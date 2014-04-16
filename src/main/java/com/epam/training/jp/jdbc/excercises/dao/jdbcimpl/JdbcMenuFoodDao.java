@@ -11,7 +11,7 @@ public class JdbcMenuFoodDao extends GenericJdbcDao implements MenuFoodDao {
 	}
 
 	@Override
-	public void removeMenuFoods(int id) {
+	public void removeMenuFoods(int menuId) {
 		//TODO: implement
 		throw new UnsupportedOperationException();
 	}
