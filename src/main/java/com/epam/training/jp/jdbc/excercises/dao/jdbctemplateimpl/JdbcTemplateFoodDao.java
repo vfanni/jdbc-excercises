@@ -1,5 +1,7 @@
 package com.epam.training.jp.jdbc.excercises.dao.jdbctemplateimpl;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -25,4 +27,12 @@ public class JdbcTemplateFoodDao extends JdbcDaoSupport implements FoodDao {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void save(List<Food> foods) {
+		//TODO: implement with batch
+		throw new UnsupportedOperationException();
+		
+	}
+
+	
 }
