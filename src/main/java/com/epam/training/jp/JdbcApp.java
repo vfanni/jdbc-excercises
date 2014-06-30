@@ -1,15 +1,21 @@
 package com.epam.training.jp;
+import static com.google.common.collect.Lists.newArrayList;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import com.epam.training.jp.jdbc.excercises.domain.Address;
+import com.epam.training.jp.jdbc.excercises.domain.Food;
 import com.epam.training.jp.jdbc.excercises.helper.DatabaseCreator;
 import com.epam.training.jp.jdbc.excercises.service.RestaurantService;
 import com.epam.training.jp.jdbc.excercises.spring.SpringConfigurationDataSource;
 import com.epam.training.jp.jdbc.excercises.spring.SpringConfigurationJdbcDao;
 import com.epam.training.jp.jdbc.excercises.spring.SpringConfigurationService;
+import com.google.common.collect.Lists;
 
 
 public class JdbcApp {
@@ -35,6 +41,17 @@ public class JdbcApp {
 				
 		restaurantService.save(address);
 		
+		List<Food> foodList = newArrayList();
+
+		for(int i=0;i<5;i++){
+			Food food = new Food();
+			food.setCalories(i+5);
+			food.setName("Food " + i);
+			food.setVegan(false);
+			food.setPrice(i+1000);
+			foodList.add(food);
+		}
+		restaurantService.save(foodList); 
 		
 		System.out.println("Retreived id of saved address: " + address.getId());
 		

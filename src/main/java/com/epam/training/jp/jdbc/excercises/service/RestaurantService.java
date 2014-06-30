@@ -58,6 +58,11 @@ public class RestaurantService {
 	public List<RestaurantWithAddress> getAllRestaurantsWithAddress() {
 		return restaurantDao.getAllRestaurantsWithAddress();
 	}
+
+
+	public void save(List<Food> foods) {
+		foodDao.save(foods);
+	}
 	
 	
 	

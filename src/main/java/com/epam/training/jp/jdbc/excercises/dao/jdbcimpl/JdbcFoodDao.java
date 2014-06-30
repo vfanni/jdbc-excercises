@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -62,6 +63,32 @@ public class JdbcFoodDao extends GenericJdbcDao implements FoodDao {
 			throw new RuntimeException();
 		}
 		
+	}
+
+
+	@Override
+	public void save(List<Food> foods) {
+
+		String sql = "insert INTO food VALUES(null, ?, ?, ?, ?);";
+
+		try (Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+			conn.setAutoCommit(false);
+			for (Food actualFood : foods) {
+				ps.setInt(1, actualFood.getCalories());
+				ps.setBoolean(2, actualFood.isVegan());
+				ps.setString(3, actualFood.getName());
+				ps.setInt(4, actualFood.getPrice());
+				ps.addBatch();
+			}
+
+			ps.executeBatch();
+			ps.clearBatch();
+			conn.commit();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
